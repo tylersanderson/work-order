@@ -8,7 +8,7 @@ const OrderList = ({orderArray}) => {
 	return (
 		<div className='flex flex-column items-center'>
 		{
-			orderArray.map((user, i) => {
+			orderArray.map((order, i) => {
 			return (
 				<Order 
 					key={i}

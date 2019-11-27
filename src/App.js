@@ -5,6 +5,7 @@ import Logo from './components/Logo/Logo';
 import Modal from './components/Modal/Modal';
 import Profile from './components/Profile/Profile';
 import OrderList from './components/Orders/OrderList';
+import SearchBox from './components/SearchBox/SearchBox';
 import './App.css';
 
 const initialState = {
@@ -20,7 +21,18 @@ const initialState = {
     joined: '',
     age: '',
     pet: ''
-  }
+  },
+  searchfield: '',
+  orders: [{"id": 1, 
+            "orderNumber": "200422", 
+            "address": "221B Baker St", 
+            "description": "Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise"
+            },
+            {"id": 2, 
+            "orderNumber": "200423", 
+            "address": "221C Baker St", 
+            "description": "Cracky about noisy neighbor"
+            }],
 }
 
 class App extends Component {
@@ -28,7 +40,7 @@ class App extends Component {
     super();
     this.state = initialState;
   }
-
+    
   componentDidMount() {
     const token = window.sessionStorage.getItem('token');
     if (token) {
@@ -102,8 +114,17 @@ loadUser = (data) => {
     }))
   }
 
+  onSearchChange = (event) => {
+  this.setState({searchfield: event.target.value});
+  }
+
   render() {
     const { isSignedIn, route, isProfileOpen, user } = this.state;
+    const { orders, searchfield } = this.state;
+    const filteredOrders = orders.filter(order => {
+      return order.address.toLowerCase().includes(searchfield.toLowerCase());
+    })
+    console.log([filteredOrders])
     return (
       <div className="App">
          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} 
@@ -120,9 +141,8 @@ loadUser = (data) => {
         { route === 'home' 
             ? <div>
               <h2>Work Orders</h2>
-                <OrderList orderArray={[{"id": 1, "orderNumber": "200422", "address": "221B Baker St", "description": "Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise"},
-                                    {"id": 2, "orderNumber": "200423", "address": "221C Baker St", "description": "Cracky about noisy neighbor"}
-                ]}/>
+              <SearchBox searchChange={this.onSearchChange}/>
+                <OrderList orderArray={filteredOrders}/>
               </div>
             : (
                 <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>

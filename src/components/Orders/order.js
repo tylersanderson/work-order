@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Order = (props) => {
-	console.log(props)
 	return (
 		<div className='bg-light-yellow dib br3 pa2 mb3 grow bw2 shadow-5 w-75'>
 			<img 
