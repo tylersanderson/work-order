@@ -1,8 +1,18 @@
 import React from 'react';
 
-const Order = (props) => {
-	return (
-		<div className='bg-light-yellow dib br3 pa2 mb3 grow bw2 shadow-5 w-75'>
+class Order extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			orderNumber: this.props.orderNumber,
+		}
+	}
+	
+/*const Order = (props) => {*/
+	render() {
+		return(
+		<div className='bg-light-yellow dib br3 pa2 mb3 grow bw2 shadow-5 w-75 pointer'
+			 onClick={this.props.toggleOrderModal}>
 			<img 
 				className='pa2 fl w-30'
 				alt='workorder' 
@@ -11,16 +21,17 @@ const Order = (props) => {
 		/*			height: 200,*/
 					width: 100,
 				}}
-				 />
+				/>
 			<div className='tl ml2 self-start'>
-				<h2>{props.orderNumber}</h2>
-				<h5>{props.address}</h5>
-				<p>{props.description}</p>
+				<h2>{this.props.orderNumber}</h2>
+				<h5>{this.props.address}</h5>
+				<p>{this.props.description}</p>
 			</div>
+			
 		</div>
-	);
+		)
+	};
 }
-
 
 
 export default Order;

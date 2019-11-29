@@ -1,7 +1,7 @@
 import React from 'react';
 import Order from './order';
 
-const OrderList = ({orderArray}) => {
+const OrderList = ({orderArray, toggleOrderModal}) => {
 /*	if (true) {
 		throw new Error('NOOOOO!');
 	}*/
@@ -10,12 +10,13 @@ const OrderList = ({orderArray}) => {
 		{
 			orderArray.map((order, i) => {
 			return (
-				<Order 
+				<Order
 					key={i}
 					id={orderArray[i].id} 
 					orderNumber={orderArray[i].orderNumber} 
 					address={orderArray[i].address}
 					description={orderArray[i].description}
+					toggleOrderModal={toggleOrderModal}
 					/>
 			)
 		})	
