@@ -1,7 +1,7 @@
 import React from 'react';
 import Order from './order';
 
-const OrderList = ({orderArray, toggleOrderModal}) => {
+const OrderList = ({orderArray, loadOrders}) => {
 /*	if (true) {
 		throw new Error('NOOOOO!');
 	}*/
@@ -13,11 +13,12 @@ const OrderList = ({orderArray, toggleOrderModal}) => {
 				<Order
 					key={i}
 					id={orderArray[i].id} 
-					orderNumber={orderArray[i].orderNumber} 
+					ordernumber={orderArray[i].ordernumber} 
 					address={orderArray[i].address}
 					description={orderArray[i].description}
-					toggleOrderModal={toggleOrderModal}
-					/>
+					ordernotes={orderArray[i].ordernotes}
+					loadOrders={loadOrders}
+				/>
 			)
 		})	
 	}

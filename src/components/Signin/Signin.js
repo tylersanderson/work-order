@@ -47,9 +47,30 @@ onSubmitSignIn = () => {
 		              if (user && user.email) {
 		                console.log(user)
 		                this.props.loadUser(user)
-		                this.props.onRouteChange('home');
+		               // this.props.onRouteChange('home');
 		              }
 		            })
+
+					.then(orders => {
+				        if (true) {
+				          fetch(`http://192.168.99.100:3000/orders/false`, {
+				            method: 'get',
+				            headers: {
+				            'Content-Type': 'application/json',
+				            'Authorization': data.token
+				            }
+				          })
+				            .then(resp => resp.json())
+				            .then(orders => {
+				              if (true) {
+				                console.log(orders)
+				                this.props.loadOrders(orders)
+				                this.props.onRouteChange('home');
+				              }
+				            })
+				        }
+				    })
+
 		      .catch(console.log)
 			}
 		})

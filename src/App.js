@@ -4,7 +4,6 @@ import Signin from './components/Signin/Signin';
 import Logo from './components/Logo/Logo';
 import Modal from './components/Modal/Modal';
 import Profile from './components/Profile/Profile';
-import OrderModal from './components/OrderModal/OrderModal';
 import OrderList from './components/Orders/OrderList';
 import SearchBox from './components/SearchBox/SearchBox';
 import './App.css';
@@ -14,7 +13,6 @@ const initialState = {
   route: 'signin',
   isSignedIn: false,
   isProfileOpen: false,
-  isOrderModalOpen: false,
   user: {
     id: '',
     name: '',
@@ -24,22 +22,8 @@ const initialState = {
     age: '',
     pet: ''
   },
-  orderData: {
-    orderNumber: '',
-    address: '',
-    description: ''
-  },
   searchfield: '',
-  orders: [{"id": 1, 
-            "orderNumber": "200422", 
-            "address": "221B Baker St", 
-            "description": "Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise Sherlock Holmes continually making noise"
-            },
-            {"id": 2, 
-            "orderNumber": "200423", 
-            "address": "221C Baker St", 
-            "description": "Cranky about noisy neighbor"
-            }],
+  orders: [],
 }
 
 class App extends Component {
@@ -73,6 +57,25 @@ class App extends Component {
               if (user && user.email) {
                 console.log(user)
                 this.loadUser(user)
+                //this.onRouteChange('home');
+              }
+            })
+        }
+      })
+      .then(orders => {
+        if (true) {
+          fetch(`http://192.168.99.100:3000/orders/false`, {
+            method: 'get',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+            }
+          })
+            .then(resp => resp.json())
+            .then(orders => {
+              if (true) {
+                console.log(orders)
+                this.loadOrders(orders)
                 this.onRouteChange('home');
               }
             })
@@ -81,6 +84,15 @@ class App extends Component {
       .catch(console.log)
     }
   }
+
+loadOrders = (orders) => {
+  if (orders.constructor === Array && orders.length > 0) {
+    this.setState({ orders }); 
+  }
+  else {
+    this.setState({orders: []})
+  }
+}
 
 loadUser = (data) => {
   this.setState({user: {
@@ -91,14 +103,6 @@ loadUser = (data) => {
     joined: data.joined,
     age: data.age,
     pet: data.pet
-  }})
-}
-
-loadOrder = (data) => {
-  this.setState({orderData: {
-    orderNumber: data.orderNumber,
-    address: data.address,
-    description: data.description
   }})
 }
 
@@ -129,24 +133,17 @@ loadOrder = (data) => {
     }))
   }
 
-  toggleOrderModal =() => {
-    console.log('toggle Order');
-    this.setState(prevState => ({
-      ...prevState,
-      isOrderModalOpen: !prevState.isOrderModalOpen
-    }))
-  }
-
   onSearchChange = (event) => {
   this.setState({searchfield: event.target.value});
   }
 
   render() {
-    const { isSignedIn, route, isProfileOpen, isOrderModalOpen, user, orderData } = this.state;
-    const { orders, searchfield } = this.state;
-    const filteredOrders = orders.filter(order => {
-      return order.address.toLowerCase().includes(searchfield.toLowerCase());
+    const { isSignedIn, route, isProfileOpen, user, orders, searchfield } = this.state;
+        const filteredOrders = orders.filter(order => {
+        return order.address.toLowerCase().includes(searchfield.toLowerCase());
     })
+    const sortedOrders = filteredOrders.sort((a,b) => {return (a.ordernumber > b.ordernumber) ? 1 : ((b.ordernumber > a.ordernumber) ? -1 : 0);} )
+    console.log(sortedOrders);
     return (
       <div className="App">
          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} 
@@ -164,19 +161,17 @@ loadOrder = (data) => {
             ? <div>
               <h2>Work Orders</h2>
               <SearchBox searchChange={this.onSearchChange}/>
-                <OrderList orderArray={filteredOrders} toggleOrderModal={this.toggleOrderModal}/>
-                  { isOrderModalOpen && 
-                    <Modal>
-                      <OrderModal 
-                        isOrderModalOpen={isOrderModalOpen} 
-                        toggleOrderModal={this.toggleOrderModal} 
-                        orderData={orderData}
-                        loadOrder={this.loadOrder} />
-                    </Modal>
-                  }
+                <OrderList 
+                  orderArray={sortedOrders} 
+                  loadOrders={this.loadOrders}
+                />
               </div>
             : (
-                <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+                <Signin 
+                  loadUser={this.loadUser} 
+                  onRouteChange={this.onRouteChange}
+                  loadOrders={this.loadOrders}
+                />
               )
         }
       </div>
