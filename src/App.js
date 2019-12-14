@@ -85,6 +85,43 @@ class App extends Component {
     }
   }
 
+  onOrderReset = () => {
+    fetch(`http://192.168.99.100:3000/orders/`, {
+      method: 'put',
+      headers: {
+              'Content-Type': 'application/json',
+              'Authorization': window.sessionStorage.getItem('token')
+            },
+      body: JSON.stringify({ 
+        formInput: "" 
+      })
+    }).then(resp => {
+      if (resp.status === 200 || resp.status === 304) {
+        //this.props.toggleOrderModal();
+      }
+    })
+      .then(orders => {
+            if (true) {
+              fetch(`http://192.168.99.100:3000/orders/false`, {
+                method: 'get',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': window.sessionStorage.getItem('token')
+                }
+              })
+                .then(resp => resp.json())
+                .then(orders => {
+                  if (true) {
+                   // console.log(orders)
+                    this.loadOrders(orders)
+                    //this.onRouteChange('home');
+                  }
+                })
+            }
+        })
+    .catch(console.log)
+  }
+
 loadOrders = (orders) => {
   if (orders.constructor === Array && orders.length > 0) {
     this.setState({ orders }); 
@@ -165,6 +202,11 @@ loadUser = (data) => {
                   orderArray={sortedOrders} 
                   loadOrders={this.loadOrders}
                 />
+                <button 
+                    onClick={() => this.onOrderReset()}
+                    className='b pa2 grow pointer hover-white w-40 bg-light-red b--black-20'>
+                    Reset Sample Orders
+                  </button>
               </div>
             : (
                 <Signin 
