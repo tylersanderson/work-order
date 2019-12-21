@@ -17,6 +17,8 @@ const OrderList = ({orderArray, loadOrders}) => {
 					address={orderArray[i].address}
 					description={orderArray[i].description}
 					ordernotes={orderArray[i].ordernotes}
+					orderlat={orderArray[i].orderlat}
+					orderlong={orderArray[i].orderlong}
 					loadOrders={loadOrders}
 				/>
 			)

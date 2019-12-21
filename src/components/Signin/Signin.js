@@ -76,6 +76,13 @@ onSubmitSignIn = () => {
 		})
 }
 
+	handleEnter = (event) => {
+	    if (event.key === 'Enter') {
+	        this.onSubmitSignIn()
+	    };
+	}
+
+
 	render () {
 		const { onRouteChange } = this.props;
 		return (
@@ -102,6 +109,7 @@ onSubmitSignIn = () => {
 				        	name="password"  
 				        	id="password" 
 				        	onChange={this.onPasswordChange}
+				        	onKeyPress={this.handleEnter}
 				        />
 				      </div>
 				    </fieldset>

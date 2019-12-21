@@ -50,6 +50,8 @@ toggleOrderModal =() => {
 		                    address={this.props.address}
 		                    description={this.props.description}
 		                    ordernotes={this.props.ordernotes}
+		                    orderlat={this.props.orderlat}
+		                    orderlong={this.props.orderlong}
 		                    loadOrders={this.props.loadOrders}
 		                />
 	                </Modal>
