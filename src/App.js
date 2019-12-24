@@ -17,10 +17,9 @@ const initialState = {
     id: '',
     name: '',
     email: '',
-    entries: 0,
     joined: '',
     age: '',
-    pet: ''
+    occupation: ''
   },
   searchfield: '',
   orders: [],
@@ -136,10 +135,9 @@ loadUser = (data) => {
     id: data.id,
     name: data.name,
     email: data.email,
-    entries: data.entries,
     joined: data.joined,
     age: data.age,
-    pet: data.pet
+    occupation: data.occupation
   }})
 }
 
