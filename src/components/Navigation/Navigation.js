@@ -10,10 +10,13 @@ const Navigation =  ({ onRouteChange, isSignedIn, toggleModal }) => {
 			);
 		} else {
 			return (
-				<nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-					<p onClick={() => onRouteChange('signin')} className='f3 link dim black underline pa3 pointer'>Sign In</p>
-					<p onClick={() => onRouteChange('info')} className='f3 link dim black underline pa3 pointer'>Info</p>
-				</nav>
+				<div>
+					<nav style={{display: 'flex', justifyContent: 'flex-end'}}>
+						<p onClick={() => onRouteChange('signin')} className='f3 link dim black underline pa3 pointer grow'>Sign In</p>
+						<p onClick={() => onRouteChange('info')} className='f3 link dim black underline pa3 pointer grow'>Info</p>
+					</nav>
+				<h1 className='f2 grow code'>Work Order App</h1>
+				</div>
 			);
 		}
 }

@@ -36,8 +36,6 @@ class Map extends React.Component {
 
   render() {
     const { ordernumber, orderlat, orderlong } = this.props;
-    console.log(this.state.center)
-    console.log(this.state.zoom)
     return (
       // Important! Always set the container height explicitly
       <div> 

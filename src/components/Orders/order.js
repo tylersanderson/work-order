@@ -12,7 +12,6 @@ class Order extends React.Component {
 	}
 
 toggleOrderModal =() => {
-    console.log('toggle Order');
     this.setState(prevState => ({
       ...prevState,
       isOrderModalOpen: !prevState.isOrderModalOpen
@@ -23,7 +22,7 @@ toggleOrderModal =() => {
 	render() {
 		const {isOrderModalOpen} = this.state
 		return(
-		<div className='bg-light-yellow dib br3 pa2 mb3 grow bw2 shadow-5 w-75 pointer'>
+		<div className='bg-light-yellow dib br3 pa2 mb3 grow bw2 shadow-5 w-75 mw7-ns pointer'>
 			<div onClick={this.toggleOrderModal}>
 				<img 
 					className='pa2 fl w-30'

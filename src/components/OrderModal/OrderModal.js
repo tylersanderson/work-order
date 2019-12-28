@@ -15,7 +15,6 @@ class OrderModal extends React.Component {
 	}
 
 	toggleOrderComplete =() => {
-	    console.log('toggle Order Complete');
 	    this.setState(prevState => ({
 	      ...prevState,
 	      isordercomplete: !prevState.isordercomplete
@@ -23,7 +22,6 @@ class OrderModal extends React.Component {
   	}
 
   	toggleMap =() => {
-	    console.log('toggle mapopen');
 	    this.setState(prevState => ({
 	      ...prevState,
 	      ismapopen: !prevState.ismapopen

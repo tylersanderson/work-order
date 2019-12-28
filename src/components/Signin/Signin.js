@@ -45,7 +45,6 @@ onSubmitSignIn = () => {
 		            .then(resp => resp.json())
 		            .then(user => {
 		              if (user && user.email) {
-		                console.log(user)
 		                this.props.loadUser(user)
 		               // this.props.onRouteChange('home');
 		              }
@@ -63,7 +62,6 @@ onSubmitSignIn = () => {
 				            .then(resp => resp.json())
 				            .then(orders => {
 				              if (true) {
-				                console.log(orders)
 				                this.props.loadOrders(orders)
 				                this.props.onRouteChange('home');
 				              }
@@ -83,14 +81,19 @@ onSubmitSignIn = () => {
 	}
 
 
-	render () {
-		const { onRouteChange } = this.props;
+	
+render () {
 		return (
-			<article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+			<article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">				
 				<main className="pa4 black-80">
 				  <div className="measure">
 				    <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
 				      <legend className="f1 fw6 ph0 mh0">Sign In</legend>
+				      <div className="">
+				      	Demo app using the credentials below:
+				      	<p className="pa0">Email: demo@demo.com<br/>
+				      	Password: demo</p>
+				      </div>
 				      <div className="mt3">
 				        <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
 				        <input 

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
-import Logo from './components/Logo/Logo';
 import Modal from './components/Modal/Modal';
 import Profile from './components/Profile/Profile';
 import OrderList from './components/Orders/OrderList';
 import SearchBox from './components/SearchBox/SearchBox';
+import Info from './components/Info/Info';
 import './App.css';
 
 const initialState = {
@@ -54,7 +54,6 @@ class App extends Component {
             .then(resp => resp.json())
             .then(user => {
               if (user && user.email) {
-                console.log(user)
                 this.loadUser(user)
                 //this.onRouteChange('home');
               }
@@ -73,7 +72,6 @@ class App extends Component {
             .then(resp => resp.json())
             .then(orders => {
               if (true) {
-                console.log(orders)
                 this.loadOrders(orders)
                 this.onRouteChange('home');
               }
@@ -178,7 +176,6 @@ loadUser = (data) => {
         return order.address.toLowerCase().includes(searchfield.toLowerCase());
     })
     const sortedOrders = filteredOrders.sort((a,b) => {return (a.ordernumber > b.ordernumber) ? 1 : ((b.ordernumber > a.ordernumber) ? -1 : 0);} )
-    console.log(sortedOrders);
     return (
       <div className="App">
          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} 
@@ -194,7 +191,7 @@ loadUser = (data) => {
         }
         { route === 'home' 
             ? <div>
-              <h2>Work Orders</h2>
+              <h2 className='code'>Work Orders</h2>
               <SearchBox searchChange={this.onSearchChange}/>
                 <OrderList 
                   orderArray={sortedOrders} 
@@ -202,16 +199,18 @@ loadUser = (data) => {
                 />
                 <button 
                     onClick={() => this.onOrderReset()}
-                    className='b pa2 grow pointer hover-white w-40 bg-light-red b--black-20'>
+                    className='b pa2 grow pointer hover-white w-25 bg-light-red b--black-20'>
                     Reset Sample Orders
                   </button>
               </div>
             : (
-                <Signin 
+                route === 'signin'
+                ? <Signin 
                   loadUser={this.loadUser} 
                   onRouteChange={this.onRouteChange}
                   loadOrders={this.loadOrders}
                 />
+                : <Info/>
               )
         }
       </div>
