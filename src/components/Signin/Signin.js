@@ -23,7 +23,7 @@ saveAuthTokenInSession = (token) => {
 }
 
 onSubmitSignIn = () => {
-	fetch('http://192.168.99.100:3000/signin', {
+	fetch('https://glacial-atoll-53901.herokuapp.com/signin', {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({
@@ -35,7 +35,7 @@ onSubmitSignIn = () => {
 		.then(data => {
 			if (data.userId && data.success === 'true') {
 				this.saveAuthTokenInSession(data.token);
-		        fetch(`http://192.168.99.100:3000/profile/${data.userId}`, {
+		        fetch(`https://glacial-atoll-53901.herokuapp.com/profile/${data.userId}`, {
 		            method: 'get',
 		            headers: {
 		            'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ onSubmitSignIn = () => {
 
 					.then(orders => {
 				        if (true) {
-				          fetch(`http://192.168.99.100:3000/orders/false`, {
+				          fetch(`https://glacial-atoll-53901.herokuapp.com/orders/false`, {
 				            method: 'get',
 				            headers: {
 				            'Content-Type': 'application/json',

@@ -34,7 +34,7 @@ class App extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem('token');
     if (token) {
-      fetch('http://192.168.99.100:3000/signin', {
+      fetch('https://glacial-atoll-53901.herokuapp.com/signin', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ class App extends Component {
       .then(resp => resp.json())
       .then(data => {
         if (data && data.id) {
-          fetch(`http://192.168.99.100:3000/profile/${data.id}`, {
+          fetch(`https://glacial-atoll-53901.herokuapp.com/profile/${data.id}`, {
             method: 'get',
             headers: {
             'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ class App extends Component {
       })
       .then(orders => {
         if (true) {
-          fetch(`http://192.168.99.100:3000/orders/false`, {
+          fetch(`https://glacial-atoll-53901.herokuapp.com/orders/false`, {
             method: 'get',
             headers: {
             'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ class App extends Component {
   }
 
   onOrderReset = () => {
-    fetch(`http://192.168.99.100:3000/orders/`, {
+    fetch(`https://glacial-atoll-53901.herokuapp.com/orders/`, {
       method: 'put',
       headers: {
               'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ class App extends Component {
     })
       .then(orders => {
             if (true) {
-              fetch(`http://192.168.99.100:3000/orders/false`, {
+              fetch(`https://glacial-atoll-53901.herokuapp.com/orders/false`, {
                 method: 'get',
                 headers: {
                 'Content-Type': 'application/json',

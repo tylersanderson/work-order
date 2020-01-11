@@ -39,7 +39,7 @@ class OrderModal extends React.Component {
 	}
 
 	onOrderUpdate = (data) => {
-		fetch(`http://192.168.99.100:3000/orders/${this.props.ordernumber}`, {
+		fetch(`https://glacial-atoll-53901.herokuapp.com/orders/${this.props.ordernumber}`, {
 			method: 'post',
 			headers: {
               'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ class OrderModal extends React.Component {
 		})
 			.then(orders => {
 		        if (true) {
-		          fetch(`http://192.168.99.100:3000/orders/false`, {
+		          fetch(`https://glacial-atoll-53901.herokuapp.com/orders/false`, {
 		            method: 'get',
 		            headers: {
 		            'Content-Type': 'application/json',
